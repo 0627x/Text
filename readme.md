@@ -15,7 +15,7 @@
 
 处理后的赛题训练数据如下：
 
-![1622134434490](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622134434490.png)
+![图片](https://user-images.githubusercontent.com/84381031/119923334-169f1c00-bfa4-11eb-9068-a54f2547cf41.png)
 
 
 
