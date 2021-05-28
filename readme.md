@@ -87,7 +87,8 @@ Word2vec是词嵌入（ word embedding) 的一种。判断一个词的词性，�
 TextCNN的网络结构
 数据预处理
 再将TextCNN网络的具体结构之前，先讲一下TextCNN处理的是什么样的数据以及需要什么样的数据输入格式。假设现在有一个文本分类的任务，我们需要对一段文本进行分类来判断这个文本是是属于哪个类别：体育、经济、娱乐、科技等。训练数据集如下示意图：
-￼
+![图片](https://user-images.githubusercontent.com/84381031/119923614-8ad9bf80-bfa4-11eb-887e-a3a723667e36.png)
+
 第一列是文本的内容，第二列是文本的标签。首先需要对数据集进行处理，步骤如下：
 \- 分词 中文文本分类需要分词，有很多开源的中文分词工具，例如Jieba等。分词后还会做进一步的处理，去除掉一些高频词汇和低频词汇，去掉一些无意义的符号等。
 \- 建立词典以及单词索引 建立词典就是统计文本中出现多少了单词，然后为每个单词编码一个唯一的索引号，便于查找。如果对以上词典建立单词索引，上面的词典表明，“谷歌”这个单词，可以用数字 0 来表示，“乐视”这个单词可以用数字 1 来表示。
@@ -95,7 +96,7 @@ TextCNN的网络结构
 
 TextCNN结构
 TextCNN的结构比较简单，输入数据首先通过一个embedding layer，得到输入语句的embedding表示，然后通过一个convolution layer，提取语句的特征，最后通过一个fully connected layer得到最终的输出，整个模型的结构如下图：
-￼![1622135887619](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622135887619.png)
+![图片](https://user-images.githubusercontent.com/84381031/119923633-95945480-bfa4-11eb-8d4e-116b325fbb76.png)
 上图是论文中给出的视力图，下面分别介绍每一层。
 \- embedding layer：即嵌入层，这一层的主要作用是将输入的自然语言编码成distributed representation，具体的实现方法可以参考word2vec相关论文，这里不再赘述。可以使用预训练好的词向量，也可以直接在训练textcnn的过程中训练出一套词向量，不过前者比或者快100倍不止。如果使用预训练好的词向量，又分为static方法和no-static方法，前者是指在训练textcnn过程中不再调节词向量的参数，后者在训练过程中调节词向量的参数，所以，后者的结果比前者要好。更为一般的做法是：不要在每一个batch中都调节emdbedding层，而是每个100个batch调节一次，这样可以减少训练的时间，又可以微调词向量。
 \- convolution layer：这一层主要是通过卷积，提取不同的n-gram特征。输入的语句或者文本，通过embedding layer后，会转变成一个二维矩阵，假设文本的长度为|T|，词向量的大小为|d|，则该二维矩阵的大为|T|x|d|，接下的卷积工作就是对这一个|T|x|d|的二维矩阵进行的。卷积核的大小一般设定为n是卷积核的长度，|d|是卷积核的宽度，这个宽度和词向量的维度是相同的，也就是卷积只是沿着文本序列进行的，n可以有多种选择，比如2、3、4、5等。对于一个|T|x|d|的文本，如果选择卷积核kernel的大小为2x|d|，则卷积后得到的结果是|T-2+1|x1的一个向量。在TextCNN网络中，需要同时使用多个不同类型的kernel，同时每个size的kernel又可以有多个。如果我们使用的kernel size大小为2、3、4、5x|d|，每个种类的size又有128个kernel，则卷积网络一共有4x128个卷积核。￼
@@ -522,11 +523,10 @@ class Trainer():
         return (batch_inputs1, batch_inputs2, batch_masks), batch_labels
 ```
 
-![1622137109488](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622137109488.png)
+![图片](https://user-images.githubusercontent.com/84381031/119923653-a644ca80-bfa4-11eb-9905-896c4b20f3b3.png)
 
-![1622137122736](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622137122736.png)
-
+![图片](https://user-images.githubusercontent.com/84381031/119923666-ac3aab80-bfa4-11eb-9085-db0e95af6a20.png)
 ## 7.提交结果
 
-![1622137209582](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622137209582.png)
+![图片](https://user-images.githubusercontent.com/84381031/119923676-b197f600-bfa4-11eb-9e13-63bebe966f0a.png)
 
