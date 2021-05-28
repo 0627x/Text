@@ -21,7 +21,7 @@
 
 ## 3.评测标准
 
-![1622134537122](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622134537122.png)
+![图片](https://user-images.githubusercontent.com/84381031/119923375-29b1ec00-bfa4-11eb-8c4a-6fde069eca46.png)
 
 ## 二、数据分析
 
@@ -29,14 +29,14 @@
 train_df.head()
 ~~~
 
- ![1622134920981](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622134920981.png)
+ ![图片](https://user-images.githubusercontent.com/84381031/119923391-346c8100-bfa4-11eb-8463-3c2909fce483.png)
 
 ```
 train_df['text_len'] = train_df['text'].apply(lambda x: len(x.split(' ')))
 print(train_df['text_len'].describe())
 ```
 
-![1622134975075](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622134975075.png)
+![图片](https://user-images.githubusercontent.com/84381031/119923409-3c2c2580-bfa4-11eb-9889-87798c4087a8.png)
 
 对新闻句子长度的统计可以得出，每个句子平均由872个字符构成，最短的句子长度为64，最长的句子长度为7125。
 
@@ -46,7 +46,7 @@ plt.xlabel('Text char count')
 plt.title("Histogram of char count")
 ```
 
-![1622135114517](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622135114517.png)
+![图片](https://user-images.githubusercontent.com/84381031/119923422-42220680-bfa4-11eb-9076-416b52014b08.png)
 
 ```
 train_df['label'].value_counts().plot(kind='bar')
@@ -54,7 +54,7 @@ plt.title('News class count')
 plt.xlabel("category")
 ```
 
-![1622135159035](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622135159035.png)
+![图片](https://user-images.githubusercontent.com/84381031/119923442-4817e780-bfa4-11eb-9bd3-fa9e3ecc8802.png)
 
 从统计结果可以看出，赛题的数据集类别分布存在较为不均匀的情况。在训练集中体育类新闻最多，其次是股票类新闻，最少的新闻是星座新闻。
 
@@ -70,7 +70,7 @@ CNN由纽约大学的Yann Lecun于1998年提出，其本质是一个多层感知
 同时进行特征提取和分类，使得特征提取有助于特征分类
 权值共享可以减少网络的训练参数，使得神经网络结构变得简单，适应性更强
 
-![1622135349807](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622135349807.png)
+![图片](https://user-images.githubusercontent.com/84381031/119923460-5108b900-bfa4-11eb-9502-17ce1e10abd0.png)
 
 ## 2.word2vec词向量
 
@@ -78,7 +78,7 @@ CNN由纽约大学的Yann Lecun于1998年提出，其本质是一个多层感知
 word2vec的主要思路：通过单词和上下文彼此预测，对应的两个算法分别为：Skip-grams (SG)：预测上下文、Continuous Bag of Words (CBOW)：预测目标单词
 Word2vec是词嵌入（ word embedding) 的一种。判断一个词的词性，是动词还是名词。用机器学习的思路，我们有一系列样本(x,y)，这里 x 是词语，y 是它们的词性，我们要构建 f(x)->y 的映射，但这里的数学模型 f（比如神经网络、SVM）只接受数值型输入，而 NLP 里的词语，是人类的抽象总结，是符号形式的（比如中文、英文、拉丁文等等），所以需要把他们转换成数值形式，或者说——嵌入到一个数学空间里，这种嵌入方式，就叫词嵌入（word embedding)。
 
-![1622135477039](C:\Users\Ccy\AppData\Roaming\Typora\typora-user-images\1622135477039.png)
+![图片](https://user-images.githubusercontent.com/84381031/119923482-58c85d80-bfa4-11eb-95df-dbcfaa1d943c.png)
 
 ## 3.TextCNN模型
 
